@@ -1,0 +1,44 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{geometry}
+\geometry{margin=1in}
+
+\begin{document}
+
+\section*{Mathematical Derivation: Ito's Lemma \& GBM}
+
+This document provides a rigorous derivation of the log-price dynamics for a stock following Geometric Brownian Motion (GBM). This transformation is the foundation of the Black-Scholes-Merton model.
+
+\subsection*{1. Initial Stochastic Process}
+We assume the asset price $S_t$ follows the standard GBM SDE:
+\begin{equation*}
+    dS_t = \mu S_t dt + \sigma S_t dW_t
+\end{equation*}
+
+\subsection*{2. Applying the Lemma}
+To find the dynamics of the log-price, we define the transformation $f(S_t) = \ln(S_t)$. According to **Ito's Lemma**, the differential $df$ is given by:
+\begin{equation*}
+    df = \left( \frac{\partial f}{\partial t} + \mu S \frac{\partial f}{\partial S} + \frac{1}{2} \sigma^2 S^2 \frac{\partial^2 f}{\partial S^2} \right) dt + \sigma S \frac{\partial f}{\partial S} dW_t
+\end{equation*}
+
+\subsection*{3. Calculation of Derivatives}
+We calculate the necessary partial derivatives of $f(S) = \ln(S)$:
+\begin{itemize}
+    \item \textbf{First Derivative:} $\frac{\partial f}{\partial S} = \frac{1}{S}$
+    \item \textbf{Second Derivative:} $\frac{\partial^2 f}{\partial S^2} = -\frac{1}{S^2}$
+    \item \textbf{Time Derivative:} $\frac{\partial f}{\partial t} = 0$
+\end{itemize}
+
+\subsection*{4. Final Result}
+Substituting these derivatives back into the Ito formula:
+\begin{equation*}
+    d(\ln S_t) = \left( \mu S \left(\frac{1}{S}\right) + \frac{1}{2} \sigma^2 S^2 \left(-\frac{1}{S^2}\right) \right) dt + \sigma S \left(\frac{1}{S}\right) dW_t
+\end{equation*}
+
+Simplifying the terms, we arrive at the SDE for the log-return:
+\begin{equation*}
+    d(\ln S_t) = \left( \mu - \frac{1}{2}\sigma^2 \right) dt + \sigma dW_t
+\end{equation*}
+
+\end{document}
